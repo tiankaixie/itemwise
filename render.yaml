@@ -1,0 +1,71 @@
+services:
+  - type: web
+    name: itemwise-backend
+    env: python
+    plan: starter
+    region: oregon
+    buildCommand: |
+      cd backend
+      pip install --upgrade pip
+      pip install uv
+      uv pip install --system .
+    startCommand: |
+      cd backend
+      bash scripts/prestart.sh
+      uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: ENVIRONMENT
+        value: production
+      - key: PROJECT_NAME
+        value: Itemwise
+      - key: FRONTEND_HOST
+        value: https://itemwise-frontend.onrender.com
+      - key: BACKEND_CORS_ORIGINS
+        value: https://itemwise-frontend.onrender.com
+      - key: SECRET_KEY
+        generateValue: true
+      - key: POSTGRES_SERVER
+        fromDatabase:
+          name: itemwise-db
+          property: host
+      - key: POSTGRES_PORT
+        fromDatabase:
+          name: itemwise-db
+          property: port
+      - key: POSTGRES_USER
+        fromDatabase:
+          name: itemwise-db
+          property: user
+      - key: POSTGRES_PASSWORD
+        fromDatabase:
+          name: itemwise-db
+          property: password
+      - key: POSTGRES_DB
+        fromDatabase:
+          name: itemwise-db
+          property: database
+      - key: FIRST_SUPERUSER
+        value: admin@example.com
+      - key: FIRST_SUPERUSER_PASSWORD
+        generateValue: true
+      - key: EMAILS_FROM_EMAIL
+        value: no-reply@example.com
+      - key: EMAILS_FROM_NAME
+        value: Itemwise
+  - type: static
+    name: itemwise-frontend
+    plan: starter
+    buildCommand: |
+      cd frontend
+      npm install
+      npm run build
+    staticPublishPath: frontend/dist
+    envVars:
+      - key: NODE_VERSION
+        value: "20"
+      - key: VITE_API_URL
+        value: https://itemwise-backend.onrender.com/api/v1
+
+databases:
+  - name: itemwise-db
+    plan: starter
