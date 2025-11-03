@@ -60,7 +60,6 @@ services:
       cd frontend
       npm install
       npm run build
-    staticPublishPath: ./frontend/dist
 
 databases:
   - name: itemwise-db
