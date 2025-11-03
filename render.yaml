@@ -2,7 +2,7 @@ services:
   - type: web
     name: itemwise-backend
     env: python
-    plan: starter
+    plan: free
     region: oregon
     buildCommand: |
       cd backend
@@ -55,7 +55,7 @@ services:
   - type: web
     name: itemwise-frontend
     runtime: static
-    plan: starter
+    plan: free
     buildCommand: |
       cd frontend
       npm install
@@ -69,4 +69,4 @@ services:
 
 databases:
   - name: itemwise-db
-    plan: starter
+    plan: free
