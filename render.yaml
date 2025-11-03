@@ -55,7 +55,7 @@ services:
   - type: web
     name: itemwise-frontend
     runtime: static
-    plan: free
+    plan: starter
     buildCommand: |
       cd frontend
       npm install
