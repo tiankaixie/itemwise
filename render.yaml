@@ -2,7 +2,7 @@ services:
   - type: web
     name: itemwise-backend
     env: python
-    plan: starter
+    plan: free
     region: oregon
     buildCommand: |
       cd backend
@@ -61,11 +61,6 @@ services:
       npm install
       npm run build
     staticPublishPath: ./frontend/dist
-    envVars:
-      - key: NODE_VERSION
-        value: "20"
-      - key: VITE_API_URL
-        value: https://itemwise-backend.onrender.com/api/v1
 
 databases:
   - name: itemwise-db
