@@ -55,11 +55,11 @@ services:
   - type: web
     name: itemwise-frontend
     runtime: static
-    plan: free
     buildCommand: |
       cd frontend
       npm install
       npm run build
+    staticPublishPath: ./frontend/dist
 
 databases:
   - name: itemwise-db
