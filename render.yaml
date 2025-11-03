@@ -2,7 +2,7 @@ services:
   - type: web
     name: itemwise-backend
     env: python
-    plan: starter
+    plan: basic
     region: oregon
     buildCommand: |
       cd backend
