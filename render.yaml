@@ -52,9 +52,8 @@ services:
         value: no-reply@example.com
       - key: EMAILS_FROM_NAME
         value: Itemwise
-  - type: static
+  - type: static_site
     name: itemwise-frontend
-    plan: starter
     buildCommand: |
       cd frontend
       npm install
